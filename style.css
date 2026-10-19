@@ -1,0 +1,612 @@
+/* ==========================================================================
+   EMPIRE VENTURES — shared styles (home page + registration page)
+   ========================================================================== */
+
+:root {
+  /* Surfaces */
+  --bg-main: #0a130e;
+  --bg-gradient:
+    radial-gradient(ellipse 80% 55% at 15% 0%, #17392a 0%, transparent 70%),
+    radial-gradient(ellipse 60% 45% at 100% 100%, #1d2b12 0%, transparent 70%);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.12);
+
+  /* Brand */
+  --green-primary: #10b981;
+  --green-hover: #059669;
+  --green-glow: rgba(16, 185, 129, 0.25);
+  --green-deep: #1d4323;
+  --grain: #e5b225;
+  --grain-bright: #f7cb15;
+  --grain-glow: rgba(229, 178, 37, 0.28);
+  --cream: #fdf8e6;
+  --cream-deep: #f3ead0;
+
+  /* Text */
+  --text-white: #ffffff;
+  --text-muted: #a9b5ad;
+  --ink: #1f2a22;
+
+  /* Type */
+  --font-body: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  background-image: var(--bg-gradient);
+  min-height: 100vh;
+  color: var(--text-white);
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.5;
+}
+
+img { max-width: 100%; display: block; }
+
+:focus-visible {
+  outline: 2px solid var(--grain);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1.7rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, background-color 0.25s ease,
+              box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.btn:active { transform: translateY(1px) !important; }
+
+/* Gold: main action on dark backgrounds */
+.btn-primary {
+  background: var(--grain);
+  color: #1a1405;
+  box-shadow: 0 8px 24px var(--grain-glow);
+}
+.btn-primary:hover {
+  background: var(--grain-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px var(--grain-glow);
+}
+
+/* Outline: secondary action on dark backgrounds */
+.btn-ghost {
+  color: var(--text-white);
+  border-color: rgba(255, 255, 255, 0.28);
+  background: transparent;
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Forest: main action on cream backgrounds */
+.btn-forest {
+  background: var(--green-deep);
+  color: var(--cream);
+  box-shadow: 0 8px 22px rgba(29, 67, 35, 0.3);
+}
+.btn-forest:hover {
+  background: #275c30;
+  transform: translateY(-2px);
+}
+.btn-forest:focus-visible { outline-color: var(--green-deep); }
+
+/* ==========================================================================
+   Navbar (shared)
+   ========================================================================== */
+
+.header {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 24px;
+}
+
+.navbar {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8px 10px 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(14, 26, 19, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 100px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-white);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  flex: none;
+}
+
+.brand-name span { color: var(--grain); }
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-links {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.55rem 1rem;
+  border-radius: 50px;
+  white-space: nowrap;
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.nav-links:hover,
+.nav-links.active {
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-cta {
+  text-decoration: none;
+  padding: 0.65rem 1.4rem;
+  background: var(--grain);
+  color: #1a1405;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px var(--grain-glow);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
+}
+
+.nav-cta:hover {
+  background: var(--grain-bright);
+  transform: translateY(-1px);
+}
+
+.nav-back {
+  text-decoration: none;
+  padding: 0.6rem 1.25rem;
+  color: var(--text-white);
+  font-size: 0.92rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+  transition: background-color 0.25s ease;
+  white-space: nowrap;
+}
+.nav-back:hover { background: rgba(255, 255, 255, 0.1); }
+
+.nav-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  position: relative;
+}
+.nav-toggle span {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-white);
+  transition: transform 0.3s ease, top 0.3s ease;
+}
+.nav-toggle span:nth-child(1) { top: 16px; }
+.nav-toggle span:nth-child(2) { top: 24px; }
+.header.open .nav-toggle span:nth-child(1) { top: 20px; transform: rotate(45deg); }
+.header.open .nav-toggle span:nth-child(2) { top: 20px; transform: rotate(-45deg); }
+
+@media (max-width: 980px) {
+  .nav-toggle { display: block; }
+  .nav-cta { margin-left: auto; }
+
+  .nav-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+    border-radius: 24px;
+    background: #0e1a13;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  }
+  .header.open .nav-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .nav-links { padding: 0.8rem 1.1rem; border-radius: 16px; }
+}
+
+@media (max-width: 420px) {
+  .header { padding: 0 12px; }
+  .brand-name { display: none; }
+}
+
+/* ==========================================================================
+   Home page — layout helpers
+   ========================================================================== */
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-section {
+  padding: clamp(80px, 12vw, 140px) 24px;
+  position: relative;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.section-lede {
+  margin-top: 18px;
+  max-width: 44ch;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 140px 24px 90px;
+  overflow: hidden;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.7rem, 8vw, 6.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+/* Each line is masked so the text rises up from behind an invisible edge */
+.hero h1 .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.hero h1 .line span {
+  display: block;
+  transform: translateY(110%);
+  animation: rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(0.15s + var(--i) * 0.14s);
+}
+
+.hero-lede {
+  margin-top: 32px;
+  max-width: 50ch;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--text-muted);
+  animation: fade-up 0.8s ease both;
+  animation-delay: 0.65s;
+}
+
+.hero-actions {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  animation: fade-up 0.8s ease both;
+  animation-delay: 0.8s;
+}
+
+@keyframes rise { to { transform: translateY(0); } }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Ambient falling grains (generated in main.js) */
+.hero-grains {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 78%, transparent);
+          mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 78%, transparent);
+}
+.hero-grains.is-paused .grain { animation-play-state: paused; }
+
+.grain {
+  position: absolute;
+  top: 0;
+  left: var(--x);
+  width: var(--w);
+  height: calc(var(--w) * 0.34);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f7d56a, #c8971a);
+  opacity: 0;
+  animation: fall var(--dur) linear var(--delay) infinite;
+}
+
+@keyframes fall {
+  0%   { transform: translate3d(0, -10vh, 0) rotate(var(--r)); opacity: 0; }
+  8%   { opacity: var(--o); }
+  92%  { opacity: var(--o); }
+  100% { transform: translate3d(var(--sway), 110vh, 0) rotate(calc(var(--r) + 240deg)); opacity: 0; }
+}
+
+/* ==========================================================================
+   Rice varieties
+   ========================================================================== */
+
+.split {
+  display: grid;
+  gap: 48px;
+}
+@media (min-width: 900px) {
+  .split { grid-template-columns: 5fr 7fr; gap: 80px; }
+  .split-head { position: sticky; top: 120px; align-self: start; }
+}
+
+.variety-list { list-style: none; }
+
+.variety {
+  padding: 24px 0;
+  border-top: 1px solid var(--glass-border);
+}
+.variety:last-child { border-bottom: 1px solid var(--glass-border); }
+
+.variety-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.variety-name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  line-height: 1.2;
+  transition: color 0.25s ease;
+}
+.variety:hover .variety-name { color: var(--grain); }
+
+.variety-desc {
+  margin-top: 8px;
+  max-width: 52ch;
+  color: var(--text-muted);
+}
+
+/*
+  Grain silhouettes: --r is the real length-to-width ratio of the grain,
+  so long-grain rice looks long and sushi rice looks plump.
+*/
+.grains {
+  --h: 14px;
+  flex: none;
+  display: block;
+  height: var(--h);
+  width: calc(var(--r) * var(--h) * 0.86 * 4);
+  background:
+    radial-gradient(ellipse 42% 36% at 50% 50%, var(--grain) 96%, transparent 100%)
+    0 0 / calc(var(--r) * var(--h) * 0.86) 100% repeat-x;
+  transform: rotate(-4deg);
+  transition: transform 0.4s ease;
+}
+.variety:hover .grains { transform: rotate(-4deg) translateX(-6px); }
+
+/* ==========================================================================
+   Why us
+   ========================================================================== */
+
+.reasons {
+  margin-top: 56px;
+  display: grid;
+  gap: 40px;
+}
+@media (min-width: 800px) {
+  .reasons { grid-template-columns: repeat(3, 1fr); gap: 48px; }
+}
+
+.reason {
+  border-top: 2px solid var(--grain);
+  padding-top: 22px;
+}
+.reason h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+.reason p {
+  margin-top: 12px;
+  color: var(--text-muted);
+}
+
+.audience {
+  margin-top: 56px;
+  max-width: 62ch;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   Reviews
+   ========================================================================== */
+
+.quotes {
+  margin-top: 56px;
+  display: grid;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  .quotes { grid-template-columns: 1.3fr 1fr; grid-template-rows: auto auto; }
+  .quote--lead { grid-row: 1 / span 2; }
+}
+
+.quote {
+  padding: 32px;
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+}
+.quote blockquote {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+.quote--lead {
+  padding: clamp(32px, 5vw, 56px);
+  background: rgba(229, 178, 37, 0.06);
+  border-color: rgba(229, 178, 37, 0.25);
+}
+.quote--lead blockquote {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.quote figcaption {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Call to action
+   ========================================================================== */
+
+.cta-panel {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(40px, 7vw, 80px);
+  border-radius: 32px;
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+.cta-panel h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--green-deep);
+}
+.cta-panel p {
+  margin: 20px 0 36px;
+  max-width: 46ch;
+  font-size: 1.1rem;
+  color: #4a5a4f;
+}
+
+.site-footer {
+  padding: 32px 24px 40px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   Scroll reveal (CSS only, so content is never hidden if it isn't supported)
+   ========================================================================== */
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+}
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .hero h1 .line span { transform: none; }
+  .grain { display: none; }
+}
